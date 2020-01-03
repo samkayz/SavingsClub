@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+{% include 'user/head.html' %}
+<body>
+<!-- Main Wrapper -->
+<div class="inner-wrapper login-body">
+    <div class="login-wrapper">
+        <div class="container">
+            <div class="loginbox shadow-sm">
+                <div class="login-left">
+                    <img class="img-fluid" src="{% static 'assets/img/logo.png'%}" alt="Logo">
+                </div>
+                <div class="login-right">
+                    <div class="login-right-wrap">
+                        <h1>Register</h1>
+                        <p class="account-subtitle">Access to our dashboard</p>
+                        {% for message in messages %}
+                            {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                                <div class="alert alert-success" role="alert">
+                                    <i class="icon-check_circle"></i>{{ message }}.
+                                </div>
+                            {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                                <div class="alert alert-danger" role="alert">
+                                    <i class="icon-new_releases"></i>{{ message }}.
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        <!-- Form -->
+                        <form action="/user/register" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input class="form-control" name="first_name" type="text" placeholder="First Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" name="last_name" type="text" placeholder="Last Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" name="username" type="text" placeholder="Username" required>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" name="email" type="email" placeholder="Email" required>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" name="password1" type="password" placeholder="Password" required>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" name="password2" type="password" placeholder="Confirm Password" required>
+                            </div>
+                            <div class="form-group mb-0">
+                                <button class="btn btn-theme button-1 text-white ctm-border-radius btn-block" type="submit">Register</button>
+                            </div>
+                        </form>
+                        <!-- /Form -->
+                        <div class="text-center dont-have">Already have an account? <a href="/user/login">Login</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Main Wrapper -->
+{% include 'user/foot.html' %}
+</body>
+</html>
